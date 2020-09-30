@@ -1,73 +1,77 @@
+/*Jarett Allie
+September 1, 2020
+Summary */
+
 #include <stdio.h>  
 #include <stdlib.h>
+#include<string.h>
 
 int main()  
 {
-    FILE *file1;
-    FILE *file2;
+    int fileAmt;
+    char input[264];
+    int words[20];
 
-    int wrdAmt = 1;
-    int wrdAmt2 = 1;
+    char max[264];
+    char min[264];
 
-    //file1
-    char fileName[20];
 
-    scanf("%s",fileName);
+    while(fgets(input, sizeof(input), stdin) != NULL){
+        int wrdAmt = 0;
+        fileAmt++;
 
-    file1 = fopen(fileName,"r");
+        char fileName[264];
 
-    char c;
+        FILE *fileN;
+        scanf("%s", fileName);
+        strcat(fileName,".txt");
+        fileN = fopen(fileName ,"w+");
 
-    c = fgetc(file1);
+        char nextCh;
 
-    while(c != EOF){
+        nextCh = fgetc(fileN);
+
+        while(nextCh != EOF){
         
-        if(c == ' ' || c == '\n'){
-            wrdAmt++;
+            if(nextCh == ' ' || nextCh == '\n'){
+                wrdAmt++;
+            }
+
+            nextCh = fgetc(fileN);
         }
 
-        c = fgetc(file1);
-    }
+        fclose(fileN);
 
-    fclose(file1);
+        words[fileAmt - 1] = wrdAmt;
 
-    //file2
-    char fileName2[20];
+        int i;
+        int maxVal = words[0];
 
-    scanf("%s",fileName2);
+        for (i = 1; i < wrdAmt; i++) 
+            if (words[i] > maxVal) 
+                maxVal = words[i]; 
 
-    file2 = fopen(fileName2,"r");
-
-    char c2;
-
-    c2 = fgetc(file2);
-
-    while(c2 != EOF){
-        
-        if(c2 == ' ' || c2 == '\n'){
-            wrdAmt2++;
+        if(maxVal = wrdAmt){
+            strcpy(max, fileN);
         }
 
-        c2 = fgetc(file2);
+        int i;
+        int minVal = words[0];
+
+        for (i = 1; i < wrdAmt; i++) 
+            if (words[i] < minVal) 
+                minVal = words[i]; 
+
+        if(minVal = wrdAmt){
+            strcpy(min, fileN);
+        }
     }
 
-    fclose(file2);
 
-    //compare
-
-    if(wrdAmt > wrdAmt2){
-        printf("Most difficult document: %s", file1);
-        printf("Least difficult document: %s", file2);
-    }
-    else if(wrdAmt < wrdAmt2){
-        printf("Most difficult document: %s", file2);
-        printf("Least difficult document: %s", file1);
-    }
-    else{
-        printf("Most difficult document: %s", file1);
-        printf("Least difficult document: %s", file1);
-    }
-
+    printf("Most difficult document: %s", max);
+    printf("Least difficult document: %s", min);
+   
+    free(max);
     return 0;
 }
 
