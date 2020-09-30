@@ -4,7 +4,7 @@ Summary */
 
 #include <stdio.h>  
 #include <stdlib.h>
-#include<string.h>
+#include <string.h>
 
 int main()  
 {
@@ -52,10 +52,10 @@ int main()
                 maxVal = words[i]; 
 
         if(maxVal = wrdAmt){
-            strcpy(max, fileN);
+            strcpy(max, fileName);
         }
 
-        int i;
+        i = 0;
         int minVal = words[0];
 
         for (i = 1; i < wrdAmt; i++) 
@@ -63,7 +63,7 @@ int main()
                 minVal = words[i]; 
 
         if(minVal = wrdAmt){
-            strcpy(min, fileN);
+            strcpy(min, fileName);
         }
     }
 
