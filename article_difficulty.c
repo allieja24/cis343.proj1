@@ -9,22 +9,27 @@ Summary */
 int main()  
 {
     int fileAmt;
-    char input[264];
-    int words[20];
+    
+    char input[260];
+    //string of file name
+    char* fileName[5];
+    //amt of words
+    int* words[5];
 
-    char max[264];
-    char min[264];
+    int max;
+    int min;
 
 
     while(fgets(input, sizeof(input), stdin) != NULL){
         int wrdAmt = 0;
         fileAmt++;
 
-        char fileName[264];
-
         FILE *fileN;
-        scanf("%s", fileName);
-        strcat(fileName,".txt");
+
+        fileName[fileAmt - 1] = (char*) malloc(30);
+
+        scanf("%s", fileName[fileAmt - 1]);
+        strcat(fileName[fileAmt -1],".txt");
         fileN = fopen(fileName ,"w+");
 
         char nextCh;
@@ -36,41 +41,38 @@ int main()
             if(nextCh == ' ' || nextCh == '\n'){
                 wrdAmt++;
             }
-
             nextCh = fgetc(fileN);
         }
 
         fclose(fileN);
 
+        words[fileAmt - 1] = (int*) malloc (4);
         words[fileAmt - 1] = wrdAmt;
+    }
+
+        int wordArrLen = sizeof(words) / sizeof(words[0]);
 
         int i;
+        
         int maxVal = words[0];
 
-        for (i = 1; i < wrdAmt; i++) 
+        for (i = 1; i < wordArrLen; i++) 
             if (words[i] > maxVal) 
-                maxVal = words[i]; 
-
-        if(maxVal = wrdAmt){
-            strcpy(max, fileName);
-        }
+                max = i; 
 
         i = 0;
         int minVal = words[0];
 
-        for (i = 1; i < wrdAmt; i++) 
+        for (i = 1; i < wordArrLen; i++) 
             if (words[i] < minVal) 
-                minVal = words[i]; 
+               min = i; 
 
-        if(minVal = wrdAmt){
-            strcpy(min, fileName);
-        }
-    }
-
-
-    printf("Most difficult document: %s", max);
-    printf("Least difficult document: %s", min);
+    printf("Most difficult document: %s", fileName[max]);
+    printf("Least difficult document: %s", fileName[min]);
    
+    free(fileName);
+    free(words);
+
     return 0;
 }
 
