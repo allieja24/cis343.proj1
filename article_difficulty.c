@@ -61,7 +61,9 @@ int main()
         if (words[i] < minVal) 
             min = i; 
 
-
+    printf("Most difficult document: %s", fileName[max]);
+    printf("\n");
+    printf("Least difficult document: %s", fileName[min]);
     
 
     return 0;
