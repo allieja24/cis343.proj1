@@ -71,7 +71,6 @@ int main()
     printf("Most difficult document: %s", max);
     printf("Least difficult document: %s", min);
    
-    free(max);
     return 0;
 }
 
