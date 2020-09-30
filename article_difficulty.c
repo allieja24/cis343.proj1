@@ -4,6 +4,7 @@ Summary */
 
 #include <stdio.h>  
 #include <stdlib.h>
+#include <string.h>
 
 int main()  
 {
@@ -30,14 +31,38 @@ int main()
         scanf("%s", fileName[fileAmt - 1]);
         fileN = fopen(fileName[fileAmt - 1] ,"w");
 
+        char nextCh;
+
+        nextCh = fgetc(fileN);
         
+        while(nextCh != EOF){
+        
+            if(nextCh == ' ' || nextCh == '\n'){
+                wrdAmt++;
+            }
+            nextCh = fgetc(fileN);
+        }
+
+        fclose(fileN);
+
+        words[fileAmt - 1] = wrdAmt;
+
     }
 
-    
+    int i;   
+    int maxVal = words[0];
+    for (i = 1; i < sizeof(words) / sizeof(words[0]); i++) 
+            if (words[i] > maxVal) 
+                max = i;    
+    i = 0;
+    int minVal = words[0];
 
-    printf("Most difficult document: %s", fileName[max]);
-    printf("Least difficult document: %s", fileName[min]);
-   
+    for (i = 1; i < sizeof(words) / sizeof(words[0]); i++) 
+        if (words[i] < minVal) 
+            min = i; 
+
+
+    
 
     return 0;
 }
