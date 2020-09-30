@@ -10,7 +10,8 @@ int main()
 {
     int fileAmt;
     
-    char input[260];
+    char input[1024];
+
     //string of file name
     char* fileName[5];
     //amt of words
@@ -21,6 +22,7 @@ int main()
 
 
     while(fgets(input, sizeof(input), stdin) != NULL){
+        
         int wrdAmt = 0;
         fileAmt++;
 
@@ -29,8 +31,7 @@ int main()
         fileName[fileAmt - 1] = (char*) malloc(30);
 
         scanf("%s", fileName[fileAmt - 1]);
-        strcat(fileName[fileAmt -1],".txt");
-        fileN = fopen(fileName ,"w+");
+        fileN = fopen(fileName[fileAmt - 1] ,"w+");
 
         char nextCh;
 
