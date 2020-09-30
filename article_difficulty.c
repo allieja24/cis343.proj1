@@ -8,7 +8,7 @@ Summary */
 
 int main()  
 {
-    int fileAmt;
+    int fileAmt = 0;
     
     char input[1024];
 
@@ -28,49 +28,14 @@ int main()
 
         FILE *fileN;
 
-        fileName[fileAmt - 1] = (char*) malloc(30);
+        fileName[fileAmt - 1] = (char*) malloc(50);
 
         scanf("%s", fileName[fileAmt - 1]);
-        fileN = fopen(fileName[fileAmt - 1] ,"w+");
+        fileN = fopen(fileName[fileAmt - 1] ,"w");
 
-        char nextCh;
-
-        nextCh = fgetc(fileN);
-
-        while(nextCh != EOF){
         
-            if(nextCh == ' ' || nextCh == '\n'){
-                wrdAmt++;
-            }
-            nextCh = fgetc(fileN);
-        }
-
-        fclose(fileN);
-
-        words[fileAmt - 1] = (int*) malloc (4);
-        words[fileAmt - 1] = wrdAmt;
     }
 
-        int wordArrLen = sizeof(words) / sizeof(words[0]);
-
-        int i;
-        
-        int maxVal = words[0];
-
-        for (i = 1; i < wordArrLen; i++) 
-            if (words[i] > maxVal) 
-                max = i; 
-
-        i = 0;
-        int minVal = words[0];
-
-        for (i = 1; i < wordArrLen; i++) 
-            if (words[i] < minVal) 
-               min = i; 
-
-    printf("Most difficult document: %s", fileName[max]);
-    printf("Least difficult document: %s", fileName[min]);
-   
     free(fileName);
     free(words);
 
