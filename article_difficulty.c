@@ -11,35 +11,39 @@ int main(int argc, char **argv)
     int fileAmt = 0;
 
     //string of file name
-    char *fileName[10];
-        //amt of words
-    int words[10];
+    char *fileName[25];
+    //amt of words
+    int words[25];
+    int chars[25];
 
     int max = 0;
     int min = 0;
+
     int wrdAmt;
+    int charAmt;
 
     int counter = 0;
+
     for (int i = 0; i < argc; i++)
     {
         counter++;
     }
 
     if(counter == 2){
-        printf("Most difficult document: %s", argv[1]);
-        printf("\n");
-        printf("Least difficult document: %s", argv[1]);
+        printf("Most difficult document: %s\n", argv[1]);
+        printf("Least difficult document: %s\n", argv[1]);
         return 0;
     }
 
     for (int i = 1; i < counter; i++)
     {
+        charAmt = 0;
         wrdAmt = 0;
+
         fileAmt++;
 
         FILE *fileN;
 
-        fileName[fileAmt - 1] = (char *)malloc(20);
         fileName[fileAmt - 1] = argv[i];
 
         fileN = fopen(fileName[fileAmt - 1], "r");
@@ -54,36 +58,45 @@ int main(int argc, char **argv)
             {
                 wrdAmt++;
             }
+            else
+            {
+                charAmt++;
+            }
             nextCh = fgetc(fileN);
         }
 
         fclose(fileN);
 
+
         words[fileAmt - 1] = wrdAmt;
+        chars[fileAmt - 1] = charAmt;
     }
 
     int i;
-    int maxVal = words[0];
-    for (i = 1; i < argc; i++)
-        if (words[i] > maxVal)
+    float maxVal = (float) chars[0]/words[0];
+
+    for (i = 1; i < argc - 1; i++)
+    {
+        if ((float) chars[i]/words[i] > maxVal)
         {
-            maxVal = words[i];
+            maxVal = (float) chars[i]/words[i];
             max = i;
         }
+    }
 
     int j;
-    int minVal = words[0];
+    float minVal = (float) chars[0]/words[0];
 
     for (j = 1; j < argc-1; j++)
     {
-        if (words[j] < minVal)
+        if ((float) chars[j]/words[j] < minVal)
         {
-            minVal = words[j];
+            minVal = (float) chars[j]/words[j];
             min = j;
         }
     }
     printf("Most difficult document: %s\n", fileName[max]);
-    printf("Least difficult document: %s", fileName[min]);
+    printf("Least difficult document: %s\n", fileName[min]);
 
     return 0;
 }
